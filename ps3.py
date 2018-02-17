@@ -187,15 +187,15 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     new_hand = hand.copy()
+    lowercase_word = word.lower()
     
-    for c in word:
-        if c not in new_hand.keys():
-            break
+    for c in lowercase_word:
+        if c not in new_hand:
+            pass
         elif new_hand[c] <= 0:
-            break
-        elif c in new_hand.keys():
+            pass
+        elif c in new_hand:
             new_hand[c] -= 1
-
     return new_hand
         
             
@@ -217,8 +217,42 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
+    
+    hand_copy = hand.copy()
+    word_list_copy = word_list.copy()
+    lowercase_word = word.lower()
 
-    pass  # TO DO... Remove this line when you implement this function
+        
+    validity1 = 0
+    validity2 = 0
+    
+    if lowercase_word in word_list_copy:
+        validity1 = True
+        
+    for c in lowercase_word:
+        if c not in hand_copy:
+            validity2 = False
+            break
+        elif hand_copy[c] < 0:
+            validity2 = False
+            break
+        elif c in hand_copy and hand_copy[c] > 0:
+            hand_copy[c] -= 1
+            validity2 = True
+        else:
+            validity2 = False
+            break
+        
+    
+    if validity1 and validity2 is True:
+        validity = True
+    else:
+        validity = False
+    
+    return validity 
+        
+    
+    
 
 #
 # Problem #5: Playing a hand
