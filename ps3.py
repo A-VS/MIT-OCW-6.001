@@ -191,15 +191,24 @@ def update_hand(hand, word):
     
     word_lowercase = word.lower()
     new_hand = hand.copy()
+    lowercase_word = word.lower()
     
+<<<<<<< HEAD
     for c in word_lowercase:
         if c not in new_hand.keys():
             continue
         elif new_hand[c] <= 0:
             continue
         elif c in new_hand.keys():
+=======
+    for c in lowercase_word:
+        if c not in new_hand:
+            pass
+        elif new_hand[c] <= 0:
+            pass
+        elif c in new_hand:
+>>>>>>> c229838e62cde82eb799ad5ea6ad87f0cb2c9a62
             new_hand[c] -= 1
-
     return new_hand
         
             
@@ -221,6 +230,7 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
+<<<<<<< HEAD
  
     word_lowercase = word.lower()
     
@@ -257,6 +267,44 @@ def is_valid_word(word, hand, word_list):
         return False
         
 
+=======
+    
+    hand_copy = hand.copy()
+    word_list_copy = word_list.copy()
+    lowercase_word = word.lower()
+
+        
+    validity1 = 0
+    validity2 = 0
+    
+    if lowercase_word in word_list_copy:
+        validity1 = True
+        
+    for c in lowercase_word:
+        if c not in hand_copy:
+            validity2 = False
+            break
+        elif hand_copy[c] < 0:
+            validity2 = False
+            break
+        elif c in hand_copy and hand_copy[c] > 0:
+            hand_copy[c] -= 1
+            validity2 = True
+        else:
+            validity2 = False
+            break
+        
+    
+    if validity1 and validity2 is True:
+        validity = True
+    else:
+        validity = False
+    
+    return validity 
+        
+    
+    
+>>>>>>> c229838e62cde82eb799ad5ea6ad87f0cb2c9a62
 
 #
 # Problem #5: Playing a hand
